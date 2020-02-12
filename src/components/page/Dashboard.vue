@@ -5,7 +5,7 @@
                 <el-card shadow="hover">
                     <div class="D-admin">
                         <div class="D-left">
-                            <el-avatar :size="120" src="http://localhost:8081/static/img/img.146655c9.jpg"></el-avatar>
+                            <el-avatar :size="120"><img src="../../assets/img/img.jpg" /></el-avatar>
                         </div>
                         <div class="D-right">
                             <div>admin</div>

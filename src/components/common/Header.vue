@@ -28,7 +28,7 @@
         </div>
         <!-- 头像 -->
         <div>
-          <el-avatar src="http://localhost:8081/static/img/img.146655c9.jpg"></el-avatar>
+          <el-avatar><img src="../../assets/img/img.jpg" /></el-avatar>
         </div>
         <!-- 下拉选择菜单 -->
         <el-dropdown class="user-name" trigger="click" @command="handleCommand">
