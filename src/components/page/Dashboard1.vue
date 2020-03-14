@@ -8,14 +8,14 @@
                             <el-avatar :size="120"><img src="../../assets/img/img.jpg" /></el-avatar>
                         </div>
                         <div class="D-right">
-                            <div>admin</div>
-                            <div class="D-right-admin">超级管理员</div>
+                            <div>{{username}}</div>
+                            <div class="D-right-admin">{{role}}</div>
                         </div>
                     </div>
                     <div class="border-bottom"></div>
                     <div class="D-time">
-                        <div class="D-time-left">上次登录时间:</div>
-                        <div class="D-time-right">2019-11-01</div>
+                        <div class="D-time-left">111</div>
+                        <div class="D-time-right">xxyy</div>
                     </div>
                     <div class="D-time">
                         <div class="D-time-left">上次登录地点:</div>
@@ -71,8 +71,8 @@
                 </el-col>
             </el-row>
             <el-card shadow="hover" style="height:403px;">
-                <div slot="header" class="clearfix">
-                    <span>待办事项</span>
+                <div slot="header">
+                    <span>备忘录</span>
                     <el-button style="float:right; padding-right: 20px" type="text">添加</el-button>
                 </div>
                 <el-table :data="todoList" :show-header="false" style="width: 100%">
@@ -121,29 +121,30 @@ export default {
   },
   data () {
     return {
+      name: 'admin',
       todoList: [
         {
-          title: '今天要修复100个bug',
+          title: '复习css',
           status: false
         },
         {
-          title: '今天要修复100个bug',
+          title: '复习html',
           status: false
         },
         {
-          title: '今天要写100行代码加几个bug吧',
+          title: '复习vue',
           status: false
         },
         {
-          title: '今天要修复100个bug',
+          title: '复习JavaScript',
           status: false
         },
         {
-          title: '今天要修复100个bug',
+          title: '今天要写100行代码',
           status: true
         },
         {
-          title: '今天要写100行代码加几个bug吧',
+          title: '今天要改几个bug',
           status: true
         }
       ],
@@ -190,7 +191,17 @@ export default {
         ]
       }
     }
+  },
+  computed: {
+    username () {
+      let username = localStorage.getItem('ms_username')
+      return username || this.name
+    },
+    role () {
+      return this.username === 'admin' ? '超级管理员' : '普通管理员'
+    }
   }
+
 }
 </script>
 

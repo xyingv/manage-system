@@ -101,7 +101,8 @@ export default {
   },
   methods: {
     handleRead (index) {
-      this.read.splice(0, 0, this.unread[index])
+      // this.read.splice(0, 0, this.unread[index])
+      this.read.push(this.unread[index])
       this.unread.splice(index, 1)
       bus.$emit('unread', this.unread)
     },

@@ -88,21 +88,21 @@ export default {
       if (this.fullscreen) { // 退出全屏
         if (document.exitFullscreen) { // W3C
           document.exitFullscreen()
-        } else if (document.webkitCancelFullScreen) { // FireFox
+        } else if (document.webkitCancelFullScreen) { // 谷歌
           document.webkitCancelFullScreen()
-        } else if (document.mozCancelFullScreen) { // Chrome
+        } else if (document.mozCancelFullScreen) { // 火狐
           document.mozCancelFullScreen()
-        } else if (document.esExitFullscreen) { // IE11
-          document.mozCancelFullScreen()
+        } else if (document.msExitFullscreen) { // IE11
+          document.msExitFullscreen()
         }
       } else { // 进入全屏
         if (element.requestFullscreen) { // W3C
           element.requestFullscreen()
-        } else if (element.mozRequestFullScreen) { // Chrome等
+        } else if (element.mozRequestFullScreen) { // 火狐
           element.mozRequestFullScreen()
         } else if (element.msRequestFullScreen) { // IE11
           element.msRequestFullScreen()
-        } else if (element.webkitRequestFullScreen) { // FireFox
+        } else if (element.webkitRequestFullScreen) { // 谷歌
           element.webkitRequestFullScreen()
         }
       }

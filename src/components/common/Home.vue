@@ -18,7 +18,6 @@
 <script>
 import vHeader from './Header'
 import vSidebar from './Sidebar'
-import vTags from './Tags'
 import bus from './bus'
 export default {
   name: 'Home',
@@ -29,8 +28,7 @@ export default {
   },
   components: {
     vHeader,
-    vSidebar,
-    vTags
+    vSidebar
   },
   created () {
     bus.$on('collapse-content', msg => {

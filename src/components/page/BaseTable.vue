@@ -105,8 +105,7 @@ export default {
         pageSize: 10,
         name: ''
       },
-
-      list: [],
+      copyList: [],
       tableData: [],
       multipleSelection: [],
       ids: [],
@@ -118,15 +117,16 @@ export default {
     }
   },
   created () {
-    this.getData()
+    this.getData(0)
   },
   methods: {
     // 获取 easy-mock 的模拟数据
-    getData () {
+    getData (val) {
       fetchData(this.query).then(res => {
         this.list = res.list
         this.tableData = this.list
-        this.pageTotal = res.pageTotal || 50
+        this.pageTotal = this.tableData.length || 0
+        this.pages(val)
       })
     },
     // 编辑操作
@@ -157,6 +157,7 @@ export default {
     // 多选
     handleSelectionChange (val) {
       this.multipleSelection = val
+      console.log(val)
     },
     // 删除多选提示
     delAllSelection () {
@@ -165,30 +166,44 @@ export default {
       const delList = []
       for (let i = 0; i < length; i++) {
         str += this.multipleSelection[i].name + ' '
-        delList.push(this.multipleSelection[i].name)
+        delList.push(this.multipleSelection[i].id)
       }
       this.$message.error(`删除了${str}`)
       this.multipleSelection = []
-      this.tableData = this.tableData.filter(item => !(delList.includes(item.name)))
+      this.list = this.list.filter(item => !(delList.includes(item.id)))
+      const currentPage = this.query.pageIndex - 1
+      this.pages(currentPage)
     },
-    getSearch () {
+    // 触发搜索按钮
+    handleSearch () {
       const result = []
+      this.copyList = this.list
       this.list.forEach((value) => {
         if (value.name.indexOf(this.query.name) > -1 && value.address.indexOf(this.query.address) > -1) {
           result.push(value)
         }
       })
-      this.tableData = result
+      this.list = result
+      this.pages(0)
+      this.list = this.copyList
     },
-    // 触发搜索按钮
-    handleSearch (val) {
-      this.$set(this.query, 'pageIndex', 1)
-      this.getSearch()
+    pages (val) {
+      this.pageTotal = this.list.length
+      const pages = []
+      this.list.forEach((item, index) => {
+        const page = Math.floor(index / 10)
+        if (!pages[page]) {
+          pages[page] = []
+        }
+        pages[page].push(item)
+      })
+      this.tableData = pages[val]
     },
     // 分页导航
     handlePageChange (val) {
       this.$set(this.query, 'pageIndex', val)
-      this.getData()
+      const value = val - 1
+      this.getData(value)
     }
   }
 }
